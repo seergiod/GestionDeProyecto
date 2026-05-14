@@ -27,9 +27,18 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable()) 
             .authorizeHttpRequests(auth -> auth
                 // Recursos estáticos libres
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
-                // El login y registro deben ser públicos
-                .requestMatchers("/login", "/registro", "/auth/**").permitAll()
+                .requestMatchers(
+                    "/",
+                    "/home",
+                    "/login",
+                    "/registro",
+                    "/auth/**",
+                    "/css/**",
+                    "/js/**",
+                    "/img/**",
+                    "/lib/**"
+                ).permitAll()
+                .requestMatchers( "/home", "/login", "/registro", "/auth/**").permitAll()
                 // El resto requiere autenticación
                 .anyRequest().authenticated()
             )
