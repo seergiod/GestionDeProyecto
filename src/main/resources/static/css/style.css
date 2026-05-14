@@ -2334,7 +2334,7 @@ textarea.form-control {
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) {btn
   .btn {
     transition: none;
   }
@@ -2438,7 +2438,7 @@ fieldset:disabled a.btn {
 }
 
 .btn-success {
-  color: #fff;
+  color: #fff;btn
   background-color: #28a745;
   border-color: #28a745;
 }
