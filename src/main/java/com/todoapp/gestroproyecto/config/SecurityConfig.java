@@ -1,0 +1,82 @@
+package com.todoapp.gestroproyecto.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true) // Habilita seguridad a nivel de método (@PreAuthorize)
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+            // Deshabilitar CSRF solo si vas a usar herramientas externas como Postman para pruebas rápidas
+            // En producción con Thymeleaf, déjalo habilitado.
+            .csrf(csrf -> csrf.disable()) 
+            .authorizeHttpRequests(auth -> auth
+                // Recursos estáticos libres
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll()
+                // El login y registro deben ser públicos
+                .requestMatchers("/login", "/registro", "/auth/**").permitAll()
+                // El resto requiere autenticación
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login") // Asegúrate de tener un GetMapping en AuthController para esto
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/proyectos", true)
+                .failureUrl("/login?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout=true")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+            )
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED) // Estándar para SSR con Thymeleaf
+            );
+
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    /**
+     * Bean temporal para que puedas loguearte mientras terminas tu UsuarioService.
+     * Borra este método cuando implementes la carga desde DB.
+     */
+    @Bean
+    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
+        UserDetails admin = User.builder()
+                .username("admin")
+                .password(encoder.encode("admin123"))
+                .roles("ADMIN")
+                .build();
+
+        UserDetails gestor = User.builder()
+                .username("gestor")
+                .password(encoder.encode("gestor123"))
+                .roles("GESTOR")
+                .build();
+
+        return new InMemoryUserDetailsManager(admin, gestor);
+    }
+}

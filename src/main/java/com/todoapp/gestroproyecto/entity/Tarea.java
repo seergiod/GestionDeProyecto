@@ -3,43 +3,43 @@ package com.todoapp.gestroproyecto.entity;
 import com.todoapp.gestroproyecto.enums.Priority;
 import com.todoapp.gestroproyecto.enums.TaskStatus;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
-@Data
-@NoArgsConstructor
 @Entity
 @Table(name = "tareas")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Tarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @NotBlank
-    @Column(nullable = false)
-    private String titulo;
-
-    private String descripcion;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private Priority prioridad = Priority.MEDIA;
-
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private TaskStatus estado = TaskStatus.POR_HACER;
-
-    private LocalDate fechaEntrega;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "proyecto_id", nullable = false)
     private Proyecto proyecto;
 
     @ManyToOne
-    @JoinColumn(name = "asignado_a")
-    private Usuario asignadoA;
+    @JoinColumn(name = "usuario_asignado")
+    private Usuario usuarioAsignado;
+
+    @Column(nullable = false)
+    private String titulo;
+
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
+
+    @Enumerated(EnumType.STRING)
+    private Priority prioridad;
+
+    @Enumerated(EnumType.STRING)
+    private TaskStatus estado;
+
+    @Column(name = "fecha_entrega")
+    private LocalDate fechaEntrega;
 }
