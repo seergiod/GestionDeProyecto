@@ -1,5 +1,4 @@
 package com.todoapp.gestroproyecto.controller;
-
 import com.todoapp.gestroproyecto.entity.Proyecto;
 import com.todoapp.gestroproyecto.service.ProyectoService;
 import com.todoapp.gestroproyecto.service.UsuarioService;

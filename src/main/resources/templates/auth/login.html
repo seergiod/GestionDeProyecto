@@ -16,7 +16,7 @@
     </div>
 
     <div class="header-right">
-        <a th:href="@{registro.............}"><button class="header-btn">Registrarse</button></a>
+<a th:href="@{/registro}"><button class="header-btn">Registrarse</button></a>
         <a th:href="@{/}"><button  class="header-btn">Home</button></a>
     </div>
 
@@ -24,38 +24,26 @@
 
     <section id="login" class="login-section">
 
-    <form th:action="@{/login}" method="post" class="login-box">
+    <div th:if="${errorMsg}" style="color: red; margin-bottom: 15px; text-align: center;">
+        <p th:text="${errorMsg}"></p>
+    </div>
+    <div th:if="${logoutMsg}" style="color: green; margin-bottom: 15px; text-align: center;">
+        <p th:text="${logoutMsg}"></p>
+    </div>
 
+    <form th:action="@{/login}" method="post" class="login-box">
         <h2>Acceso Interno</h2>
 
         <div class="input-group">
-
-            <input 
-                type="email"
-                name="email"
-                placeholder="Correo corporativo"
-                required>
-
+            <input type="email" name="username" placeholder="Correo corporativo" required>
         </div>
 
         <div class="input-group">
-
-            <input 
-                type="password"
-                name="password"
-                placeholder="Contraseña"
-                required>
-
+            <input type="password" name="password" placeholder="Contraseña" required>
         </div>
 
-        <button type="submit" class="login-submit">
-
-            INICIAR SESIÓN
-
-        </button>
-
+        <button type="submit" class="login-submit">INICIAR SESIÓN</button>
     </form>
-
 </section>
 
 
