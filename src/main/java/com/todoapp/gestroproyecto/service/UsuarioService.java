@@ -57,4 +57,8 @@ public class UsuarioService {
 
         usuarioRepository.deleteById(id);
     }
+//contar usuarios
+    public long contarUsuarios() {
+    return usuarioRepository.count();
+}
 }
