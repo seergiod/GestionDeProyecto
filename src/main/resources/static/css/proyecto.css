@@ -1,0 +1,52 @@
+body {
+            font-family: Arial;
+            background: #1e1e2f;
+            color: white;
+            margin: 0;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 10px 15px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            text-decoration: none;
+        }
+
+        .btn:hover {
+            background: #3730a3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #2a2a3d;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #444;
+            text-align: left;
+        }
+
+        th {
+            background: #111827;
+        }
+
+        .danger {
+            background: #dc2626;
+        }

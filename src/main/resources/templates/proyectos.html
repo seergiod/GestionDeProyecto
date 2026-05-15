@@ -1,11 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Proyectos</title>
+<link rel="stylesheet" th:href="@{/css/Proyecto.css}">
+   
 </head>
+
 <body>
-    <h1>proyectos</h1>
+
+<div class="container">
+
+    <div class="topbar">
+        <h1>Proyectos</h1>
+
+        <a class="btn" th:href="@{/proyectos/nuevo}">
+            + Nuevo Proyecto
+        </a>
+    </div>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="p : ${listaProyectos}">
+            <td th:text="${p.id}"></td>
+            <td th:text="${p.nombre}"></td>
+            <td th:text="${p.descripcion}"></td>
+            <td th:text="${p.estado}"></td>
+
+            <td>
+                <a class="btn danger"
+                   th:href="@{/proyectos/eliminar/{id}(id=${p.id})}">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
 </body>
 </html>
