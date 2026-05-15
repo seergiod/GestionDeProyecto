@@ -8,7 +8,7 @@
 <body>
     <section id="register" class="register-section">
 
-    <form th:action="@{/registro}" method="post" class="register-box">
+    <form th:action="@{/registro}" th:object="${usuario}" method="post" class="register-box">
 
         <h2>Crear Cuenta</h2>
 

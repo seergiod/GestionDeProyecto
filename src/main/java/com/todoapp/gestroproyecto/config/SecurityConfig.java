@@ -67,25 +67,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    /**
-     * Bean temporal para que puedas loguearte mientras terminas tu UsuarioService.
-     * Borra este método cuando implementes la carga desde DB.
-     */
-    @Bean
-    public UserDetailsService userDetailsService(PasswordEncoder encoder) {
-        UserDetails admin = User.builder()
-                .username("admin")
-                .password(encoder.encode("admin123"))
-                .roles("ADMIN")
-                .build();
-
-        UserDetails gestor = User.builder()
-                .username("gestor")
-                .password(encoder.encode("gestor123"))
-                .roles("GESTOR")
-                .build();
-
-        return new InMemoryUserDetailsManager(admin, gestor);
-    }
 }
