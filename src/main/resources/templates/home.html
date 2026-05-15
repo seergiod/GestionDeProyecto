@@ -19,8 +19,8 @@
     </div>
 
     <div class="header-right">
-        <a href=""><button class="header-btn">Registrarse</button></a>
-        <a href="#login"><button  class="header-btn">Login</button></a>
+        <a th:href="@{/auth/registro.html}"><button class="header-btn">Registrarse</button></a>
+        <a th:href="@{/auth/login.html}"><button  class="header-btn">Login</button></a>
     </div>
 
 </header>
@@ -211,31 +211,6 @@
 
 </section>
 
-<!-- LOGIN -->
-
-<section id="login" class="login-section">
-
-    <div class="login-box">
-
-        <h2>Acceso Interno</h2>
-
-        <div class="input-group">
-            <input type="email" placeholder="Correo corporativo">
-        </div>
-
-        <div class="input-group">
-            <input type="password" placeholder="Contraseña">
-        </div>
-
-        <button class="login-submit">
-            INICIAR SESIÓN
-        </button>
-
-    </div>
-
-</section>
-
-<!-- FOOTER -->
 
 <footer>
 

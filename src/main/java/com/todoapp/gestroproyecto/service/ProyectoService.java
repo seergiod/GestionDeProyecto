@@ -32,6 +32,7 @@ public class ProyectoService {
     public Proyecto guardarProyecto(Proyecto proyecto) {
 
         return proyectoRepository.save(proyecto);
+
     }
 
     // ACTUALIZAR

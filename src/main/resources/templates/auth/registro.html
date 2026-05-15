@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section id="register" class="register-section">
+
+    <form th:action="@{/registro}" method="post" class="register-box">
+
+        <h2>Crear Cuenta</h2>
+
+        <div class="input-group">
+
+            <input 
+                type="text"
+                name="nombre"
+                placeholder="Nombre completo"
+                required>
+
+        </div>
+
+        <div class="input-group">
+
+            <input 
+                type="email"
+                name="email"
+                placeholder="Correo corporativo"
+                required>
+
+        </div>
+
+        <div class="input-group">
+
+            <input 
+                type="password"
+                name="password"
+                placeholder="Contraseña"
+                required>
+
+        </div>
+
+        <button type="submit" class="register-submit">
+
+            REGISTRARSE
+
+        </button>
+
+    </form>
+
+</section>
+</body>
+</html>
