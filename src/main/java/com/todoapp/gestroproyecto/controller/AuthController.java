@@ -1,6 +1,7 @@
 package com.todoapp.gestroproyecto.controller;
 
 import com.todoapp.gestroproyecto.entity.Usuario;
+import com.todoapp.gestroproyecto.enums.Role;
 import com.todoapp.gestroproyecto.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class AuthController {
 
     @PostMapping("/registro")
     public String registrarUsuario(@ModelAttribute Usuario usuario) {
-        // El servicio debe encargarse de encriptar la contraseña antes de guardar
+        usuario.setRol(Role.colaborador);
         usuarioService.guardarUsuario(usuario);
         return "redirect:/login?registered=true";
     }

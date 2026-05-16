@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Tarea</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #1e1e2f;
+            color: white;
+        }
+
+        .container {
+            width: 400px;
+            margin: 50px auto;
+            background: #2a2a3d;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #4f46e5;
+            color: white;
+            border: none;
+            border-radius: 6px;
+        }
+
+        button:hover {
+            background: #3730a3;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2 th:if="${tarea.id == null}">Nueva Tarea</h2>
+    <h2 th:unless="${tarea.id == null}">Editar Tarea</h2>
+
+    <form th:action="@{/tareas/guardar}" th:object="${tarea}" method="post">
+
+        <input type="hidden" th:field="*{id}">
+
+        <input type="text" th:field="*{titulo}" placeholder="Título">
+
+        <textarea th:field="*{descripcion}" placeholder="Descripción"></textarea>
+
+        <select th:field="*{prioridad}">
+            <option value="baja">Baja</option>
+            <option value="media">Media</option>
+            <option value="alta">Alta</option>
+        </select>
+
+        <select th:field="*{estado}">
+            <option value="por_hacer">Por hacer</option>
+            <option value="en_progreso">En progreso</option>
+            <option value="completada">Completada</option>
+        </select>
+
+        <select th:field="*{proyecto}">
+            <option th:each="p : ${proyectos}" th:value="${p.id}" th:text="${p.nombre}"></option>
+        </select>
+
+        <select th:field="*{usuarioAsignado}">
+            <option value="">Sin asignar</option>
+            <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombre}"></option>
+        </select>
+
+        <button type="submit">Guardar</button>
+
+    </form>
+
+</div>
+
+</body>
+</html>
